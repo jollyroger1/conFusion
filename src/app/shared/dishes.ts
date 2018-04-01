@@ -1,4 +1,4 @@
-import { Dish } from './dish';
+import { Dish } from './dish'; /* Class of data types for each dish */
 
 export const DISHES: Dish[] = [
     {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Dish } from '../shared/dish';
-import { DISHES } from '../shared/dishes';
+import { Dish } from '../shared/dish'; /* Class of data types for a dish */
+/* import { DISHES } from '../shared/dishes'; */  /* Array of json 4 dishes */ /* Use Service instead */
+import {DishService } from '../services/dish.service'; /* Service that returns array of json dishes */
 
 /* const DISHES: Dish[] = [
                          {
@@ -47,14 +48,18 @@ import { DISHES } from '../shared/dishes';
 export class MenuComponent implements OnInit {
 
   /* dishes: Dish[] = DISHES; */ /*TypeScript intelligent enough to interpret following line as this line. */
-  dishes = DISHES;
+  /* dishes = DISHES; */
+  dishes: Dish[];
   
   /* selectedDish: Dish = DISHES[0]; */
   selectedDish: Dish;
 
-  constructor() { }
+  constructor(private DishService: DishService) { }  /* Constructor required for DI - not much else */
 
+  /* LifeCycle Method */
   ngOnInit() {
+	  /* Ask dish.service to fetch array of json (all) Dishes */
+	  this.dishes = this.DishService.getDishes();
   }
 
   onSelect(dish: Dish){

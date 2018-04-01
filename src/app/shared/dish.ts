@@ -1,4 +1,4 @@
-import { Comment } from './comment';
+import { Comment } from './comment'; /* Class for comment data types */
 
 export class Dish {
     name: string;

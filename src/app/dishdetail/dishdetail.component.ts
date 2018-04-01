@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { Dish } from '../shared/dish';
+import { Dish } from '../shared/dish';  /* Formatting for dish elements */
 
 /* const DISH = {
   name: 'Uthappizza',
@@ -51,7 +51,7 @@ import { Dish } from '../shared/dish';
 export class DishdetailComponent implements OnInit {
   @Input()
   /* dish = DISH; */
-  dish = Dish;
+  dish = Dish;  /* The array of 4 json dishes */
 
   constructor() { }
 
