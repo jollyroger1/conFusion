@@ -58,7 +58,7 @@ export class DishdetailComponent implements OnInit {
   /* dish = DISH; */
   
   
-  dish = Dish;  /* The array of 4 json dishes */
+  dish: Dish;  /* The array of 4 json dishes */
 
   constructor(private dishservice: DishService, 
 			  private route: ActivatedRoute,

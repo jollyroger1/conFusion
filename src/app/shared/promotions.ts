@@ -1,4 +1,4 @@
-import { Promotion } from './promotion';
+import { Promotion } from './promotion'; /* Data types class */
 
 export const PROMOTIONS: Promotion[] = [
     {
