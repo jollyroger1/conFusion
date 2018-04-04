@@ -14,7 +14,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component'; 
+import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
 
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
@@ -26,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,8 @@ import { environment } from '../environments/environment';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,9 @@ import { environment } from '../environments/environment';
 	AppRoutingModule
   ],
   providers: [ DishService, PromotionService, LeaderService ],
+  entryComponents: [
+     LoginComponent /* Triggered by click in another component and neither part of Router Module nor explicitly included into the Template of another Component (header.component.ts file) */
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
