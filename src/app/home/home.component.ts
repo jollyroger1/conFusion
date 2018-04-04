@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 	private promotionservice: PromotionService,
 	private leaderservice: LeaderService) { } 
 
-/* Ask dish.service to fetch the Featured Dish */ 
+/* Use services to fetch data */ 
  ngOnInit() {
 	  this.dish = this.dishservice.getFeaturedDish();
 	  this.promotion = this.promotionservice.getFeaturedPromotion();
