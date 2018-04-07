@@ -56,8 +56,7 @@ import { DishService } from '../services/dish.service';
 export class DishdetailComponent implements OnInit {
   /* @Input() */  /* No longer required - using routerLink instead */
   /* dish = DISH; */
-  
-  
+    
   dish: Dish;  /* The array of 4 json dishes */
 
   constructor(private dishservice: DishService, 
@@ -67,7 +66,7 @@ export class DishdetailComponent implements OnInit {
   /* Fetch the specific dish that was selected */
   ngOnInit() {
 	 let id = + this.route.snapshot.params['id'];
-	 this.dish = this.dishservice.getDish(id);
+	 this.dishservice.getDish(id).then(dish => this.dish = dish);
   }
 
   goBack(): void {

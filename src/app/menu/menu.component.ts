@@ -59,7 +59,8 @@ export class MenuComponent implements OnInit {
   /* LifeCycle Method */
   ngOnInit() {
 	  /* Ask dish.service to fetch array of json (all) Dishes */
-	  this.dishes = this.DishService.getDishes();
+	  this.DishService.getDishes()
+		.then(dishes => this.dishes = dishes );
   }
 
   onSelect(dish: Dish){
