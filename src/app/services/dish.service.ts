@@ -6,34 +6,27 @@ import { DISHES } from '../shared/dishes'; /* DISHES is the array of json meals 
 export class DishService {
 
   constructor() { }
-  
-  /* getDishes(): Dish[] { */ /* Return a Promise instead */
-	/* getDishes(): Promise<Dish[]> {
-	  /* return DISHES; */
-	  /* return Promise.resolve(DISHES);
-  }
 
-  getDish(id: number): Promise<Dish[]>{
-	  return Promise.resolve(DISHES.filter((dish) => (dish.id === id))[0]);
-  }
-  
-  getFeaturedDish(): Dish{
-	  return Promise.resolve(DISHES.filter((dish) => (dish.featured))[0]);
-  }  */
-  
-  
-  
   getDishes(): Promise<Dish[]> {
-    return Promise.resolve(DISHES);
+    /* return Promise.resolve(DISHES); */
+	return new Promise(resolve => {
+		/* Simulate server latency with 2 second delay */
+		setTimeout(() => resolve(DISHES), 2000);
+	});
   }
 
   getDish(id: number): Promise<Dish> {
-    return Promise.resolve(DISHES.filter((dish) => (dish.id === id))[0]);
+    return new Promise(resolve => {
+		/* Simulate server latency with 2 second delay */
+		setTimeout(() => resolve(DISHES.filter((dish) => (dish.id === id))[0]), 2000);
+	});
   }
 
   getFeaturedDish(): Promise<Dish> {
-    return Promise.resolve(DISHES.filter((dish) => dish.featured)[0]);
+    return new Promise(resolve => {
+		/* Simulate server latency with 2 second delay */
+		setTimeout(() => resolve(DISHES.filter((dish) => dish.featured)[0]), 2000);
+	});
   }
-}
-
+ }
  

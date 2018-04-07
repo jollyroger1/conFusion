@@ -64,7 +64,10 @@
 		</md-list-item>
 	</md-list>
   </div>
- 
+  <div [hidden]="dish">
+	<md-spinner></md-spinner> <h4>Loading . . . Please Wait</h4>
+  </div>
+  
 <!-- Material --> 
 <!-- 	<div fxFlex="40">
         <mat-list *ngIf="dish">
