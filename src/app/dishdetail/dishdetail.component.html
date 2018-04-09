@@ -10,9 +10,9 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
-  <div fxFlex="40">
+  <div fxFlex="40"  *ngIf="dish">
 <!--    <p>Display the details of the Dish here</p> -->
-	<md-card *ngIf="dish">
+	<md-card> <!-- move *ngIf into upper div -->
 	    <md-card-header>
 		  <md-card-title>
 		     <h3>{{dish.name | uppercase }}</h3>
@@ -23,9 +23,16 @@
 		  <p> {{dish.description}}</p>
 		</md-card-content>
 		<md-card-actions>
+		<button md-button [routerLink]="['/dishdetail',prev]">
+			<span class="fa fa-chevron-left fa-lg"></span>
+		</button>
 		  <button md-button (click)="goBack()">BACK</button>
 		  <button md-button>LIKE</button>
 		  <button md-button>SHARE</button>
+		  <span class="flex-spacer"></span>
+		  <button md-button [routerLink]="['/dishdetail',next]">
+			<span class="fa fa-chevron-right fa-lg"></span>
+		</button>
 		</md-card-actions> 
 	</md-card>
   </div>
@@ -49,9 +56,9 @@
          </mat-card>
     </div>  -->
 
-  <div fxFlex="40">
+  <div fxFlex="40" *ngIf="dish">
 <!--    <p>Display the list of comments here</p> -->
-	<md-list *ngIf="dish">
+	<md-list> <!-- move *ngIf into upper div -->
 	<h3>Comments</h3>
 		<md-list-item *ngFor="let cmts of dish.comments"> 
 				<h4 md-line>{{cmts.comment}}</h4>
