@@ -24,9 +24,12 @@ export class HomeComponent implements OnInit {
 
 /* Use services to fetch data */ 
  ngOnInit() {
-	  this.dishservice.getFeaturedDish().then(dish => this.dish = dish);
-	  this.promotionservice.getFeaturedPromotion().then(promotion => this.promotion = promotion);
-	  this.leaderservice.getFeaturedLeader().then(leader => this.leader = leader);
+	 /*  this.dishservice.getFeaturedDish().then(dish => this.dish = dish); */ /* Refactor from Promise to Observable */
+	  this.dishservice.getFeaturedDish().subscribe(dish => this.dish = dish);
+	  /* this.promotionservice.getFeaturedPromotion().then(promotion => this.promotion = promotion); */ /* Refactor from Promise to Observable */
+	  this.promotionservice.getFeaturedPromotion().subscribe(promotion => this.promotion = promotion); 
+	  /* this.leaderservice.getFeaturedLeader().then(leader => this.leader = leader); */ /* Refactor from Promise to Observable */
+	  this.leaderservice.getFeaturedLeader().subscribe(leader => this.leader = leader);
   }
 
 }

@@ -66,7 +66,8 @@ export class DishdetailComponent implements OnInit {
   /* Fetch the specific dish that was selected */
   ngOnInit() {
 	 let id = + this.route.snapshot.params['id'];
-	 this.dishservice.getDish(id).then(dish => this.dish = dish);
+	 /* this.dishservice.getDish(id).then(dish => this.dish = dish);  *//* Refactor from Promise to Observable */
+	 this.dishservice.getDish(id).subscribe(dish => this.dish = dish);
   }
 
   goBack(): void {

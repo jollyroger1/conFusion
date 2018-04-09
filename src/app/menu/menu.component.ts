@@ -60,7 +60,8 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
 	  /* Ask dish.service to fetch array of json (all) Dishes */
 	  this.DishService.getDishes()
-		.then(dishes => this.dishes = dishes );
+		/* .then(dishes => this.dishes = dishes ); */ /* Refactor from Promise to Observable */
+		.subscribe(dishes => this.dishes = dishes );
   }
 
   onSelect(dish: Dish){
