@@ -95,5 +95,4 @@ export class ContactComponent implements OnInit {
 		message: ''
 	});
   }
-  
-}
+ }

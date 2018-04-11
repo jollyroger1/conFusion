@@ -3,88 +3,89 @@
 </p> -->
 
 <div class="container"
-    fxLayout="row"
-    fxLayout.sm="column"
-    fxLayout.xs="column"   
-	fxLayoutAlign.gt-md="space-around center"
-    fxLayoutGap="10px" 
-    fxLayoutGap.xs="0">
-
-  <div fxFlex="40"  *ngIf="dish">
-<!--    <p>Display the details of the Dish here</p> -->
-	<md-card> <!-- move *ngIf into upper div -->
-	    <md-card-header>
-		  <md-card-title>
-		     <h3>{{dish.name | uppercase }}</h3>
-		  </md-card-title>
-		</md-card-header>
-		<img md-card-image src="{{dish.image}}" alt="{{dish.name}}"> 
-		<md-card-content>
-		  <p> {{dish.description}}</p>
-		</md-card-content>
-		<md-card-actions>
-		<button md-button [routerLink]="['/dishdetail',prev]">
-			<span class="fa fa-chevron-left fa-lg"></span>
-		</button>
-		  <button md-button (click)="goBack()">BACK</button>
-		  <button md-button>LIKE</button>
-		  <button md-button>SHARE</button>
-		  <span class="flex-spacer"></span>
-		<button md-button [routerLink]="['/dishdetail',next]">
-			<span class="fa fa-chevron-right fa-lg"></span>
-		</button>
-		</md-card-actions> 
-	</md-card>
-  </div>
-  
-<!-- Material -->
-<!--  <div fxFlex="40">
-        <mat-card *ngIf="dish">
-             <mat-card-header>
-                 <mat-card-title>
-                     <h3>{{ dish.name | uppercase }}</h3>
-                 </mat-card-title>
-             </mat-card-header>
-             <img mat-card-image src="{{ dish.image }}" alt="{{ dish.name }}">
-             <mat-card-content>
-                 <p>{{ dish.description }}</p>
-             </mat-card-content>
-             <mat-card-actions>
-                 <button mat-button>LIKE</button>
-                 <button mat-button>SHARE</button>
-             </mat-card-actions>
-         </mat-card>
-    </div>  -->
+     fxLayout="row"
+     fxLayout.sm="column"
+     fxLayout.xs="column"
+     fxLayoutAlign.gt-md="space-around center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
 
   <div fxFlex="40" *ngIf="dish">
-<!--    <p>Display the list of comments here</p> -->
-	<md-list> <!-- move *ngIf into upper div -->
-	<h3>Comments</h3>
-		<md-list-item *ngFor="let cmts of dish.comments"> 
-				<h4 md-line>{{cmts.comment}}</h4>
-				<p md-line>
-					<span>{{cmts.rating}} Stars </span>
-				</p>
-				<p md-line>
-					<span> --{{cmts.author}} {{cmts.date | date:"MMM. dd, yyyy"}} </span>
-				</p>
-		</md-list-item>
-	</md-list>
-  </div>
-  <div [hidden]="dish">
-	<md-spinner></md-spinner> <h4>Loading . . . Please Wait</h4>
+    <md-card>
+      <md-card-header>
+        <md-card-title>
+          <h3>{{dish.name | uppercase}}</h3>
+        </md-card-title>
+      </md-card-header>
+      <img md-card-image src="{{dish.image}}" alt={{dish.name}}>
+      <md-card-content>
+        <p>{{dish.description}}
+        </p>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button [routerLink]="['/dishdetail', prev]">
+			<span class="fa fa-chevron-left fa-lg"></span>
+        </button>
+		<button md-button (click)="goBack()">BACK</button>
+        <button md-button>LIKE</button>
+        <button md-button>SHARE</button>
+			<span class="flex-spacer"></span>
+        <button md-button [routerLink]="['/dishdetail', next]">
+			<span class="fa fa-chevron-right fa-lg"></span>
+        </button>
+      </md-card-actions>
+    </md-card>
   </div>
   
-<!-- Material --> 
-<!-- 	<div fxFlex="40">
-        <mat-list *ngIf="dish">
-		<h3>Comments</h3>
-            <mat-list-item *ngFor="let cmts of dish.comments">
-                <p matLine>{{ cmts.comment }}</p>
-                <p matLine>{{ cmts.rating }} Stars</p>
-                <p matLine>-- {{ cmts.author }} {{ cmts.date | date:"MMM. dd, yyyy" }}</p>
-            </mat-list-item>
-        </mat-list>
-    </div> -->
-</div>
-
+<!-- Assignment 3 -->
+  <div fxFlex="40" *ngIf="dish">
+    <md-list>
+      <h2>Comments</h2>
+      <md-list-item *ngFor="let cmts of dish.comments">
+        <p md-line>{{cmts.comment}}</p>
+        <p md-line>{{cmts.rating}} Stars</p>
+        <p md-line>--{{cmts.author}}  <span>{{cmts.date | date}}</span></p>
+      </md-list-item>
+      <md-list-item *ngIf="dishdetailForm.valid">
+        <p md-line>{{dishdetailForm.value.comment}}</p>
+        <p md-line>{{dishdetailForm.value.rating}} Stars</p>
+        <p md-line>--{{dishdetailForm.value.author}}  <span></span></p>
+      </md-list-item>
+      <form novalidate [formGroup]="dishdetailForm" (ngSubmit)="onSubmit()">
+        <p>
+          <md-input-container class="half-width"
+                              dividerColor="{{ formErrors.author ? 'warn': 'primary' }}">
+            <input mdInput formControlName="author" placeholder="Name" type="text" required>
+            <md-hint>
+              <span [hidden]="(!formErrors.author)">{{formErrors.author}}</span>
+            </md-hint>
+          </md-input-container>
+        </p>
+		<p>
+		<md-slider step="1" thumbLabel tickInterval="1" min="0" max="5"  formControlName="rating" value="rating" >
+            </md-slider>
+		</p>
+        <p>
+          <md-input-container class="full-width">
+            <textarea mdInput formControlName="comment" placeholder="Enter Your Comments" rows=12></textarea>
+			<md-hint>
+              <span [hidden]="(!formErrors.comment)">{{formErrors.comment}}</span>
+            </md-hint>
+          </md-input-container>
+        </p>
+        <button type="submit" md-button class="background-primary text-floral-white"
+                [disabled]="dishdetailForm.invalid">Submit</button>
+      </form>
+    </md-list>
+  </div>
+ 
+ <div [hidden]="dish || errorMessage">
+    <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+ </div>
+ 
+	<div *ngIf="errorMessage">
+		<h2>Error</h2>
+		<h4>{{errorMessage}}</h4>
+	</div>
+<!-- End Assignment 3 -->	
+</div> <!-- End container class -->
