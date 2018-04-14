@@ -1,10 +1,10 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Dish } from '../shared/dish';  /* Formatting for dish elements */
+import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { Comment } from '../shared/comment';
 
@@ -24,7 +24,8 @@ export class DishdetailComponent implements OnInit {
   dishIds: number[];
   prev: number;
   next: number;
-  errorMessage: string;
+  errMess: string;
+  
    
 /* Assignment 3 */
   formErrors = {
@@ -47,7 +48,8 @@ export class DishdetailComponent implements OnInit {
  	constructor(private dishservice: DishService,
                 private location: Location,
                 private route: ActivatedRoute, 
-				private fb: FormBuilder) {
+				private fb: FormBuilder,
+				@Inject('BaseURL') private BaseURL) {
 				this.createForm();	
 			    }	
 			  
@@ -64,7 +66,7 @@ export class DishdetailComponent implements OnInit {
         this.dish = dish;
         this.array_copy = dish;
         this.setPrevNext(dish.id);
-      }, errmsg => this.errorMessage = <any>errmsg);
+      }, errmsg => this.errMess = <any>errmsg);
   }
   
   setPrevNext(dishId: number) {

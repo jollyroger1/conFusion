@@ -24,6 +24,9 @@ import { LeaderService } from './services/leader.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
+import { baseURL } from './shared/baseurl';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -52,7 +55,11 @@ import { environment } from '../environments/environment';
 	AppRoutingModule,
 	ReactiveFormsModule
   ],
-  providers: [ DishService, PromotionService, LeaderService ],
+  providers: [ 	DishService, 
+				PromotionService, 
+				LeaderService,
+				{ provide: 'BaseURL', useValue: baseURL },
+				ProcessHTTPMsgService], /* provide baseURL as Value Provider */
   entryComponents: [
      LoginComponent /* Triggered by click in another component and neither part of Router Module nor explicitly included into the Template of another Component (header.component.ts file) */
   ],
