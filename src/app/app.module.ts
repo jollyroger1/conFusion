@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
 
 import 'hammerjs';
 
@@ -53,7 +55,8 @@ import { environment } from '../environments/environment';
     MaterialModule,
     FlexLayoutModule,
 	AppRoutingModule,
-	ReactiveFormsModule
+	ReactiveFormsModule,
+	RestangularModule.forRoot(RestangularConfigFactory) /* This is further described in Restangular Documentation */
   ],
   providers: [ 	DishService, 
 				PromotionService, 

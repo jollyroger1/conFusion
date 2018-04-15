@@ -20,6 +20,7 @@ export class DishdetailComponent implements OnInit {
   dishdetailForm: FormGroup;
   comment: Comment;
   dish: Dish;  
+  dishcopy = null;  /* variable to hold returned Restangular Object */
   array_copy = null;
   dishIds: number[];
   prev: number;
@@ -64,6 +65,7 @@ export class DishdetailComponent implements OnInit {
       .switchMap((params: Params) => {return this.dishservice.getDish(+params['id'])}) /* +params converts string value of 'id' to integer */
       .subscribe(dish => {
         this.dish = dish;
+		this.dishcopy = dish;
         this.array_copy = dish;
         this.setPrevNext(dish.id);
       }, errmsg => this.errMess = <any>errmsg);
@@ -113,7 +115,10 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.dishdetailForm.value;
 	this.comment.date = (new Date()).toString();
-	this.array_copy.comments.push(this.comment);
+	/* this.array_copy.comments.push(this.comment); */ /* Refactor for Restangular*/
+	this.dishcopy.comments.push(this.comment);
+	this.dishcopy.save()
+		.subscribe(dish => this.dish = dish);
 	this.dishdetailForm.reset({
 		author: '',
 		comment: '',
