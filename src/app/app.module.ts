@@ -32,6 +32,7 @@ import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { environment } from '../environments/environment';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,

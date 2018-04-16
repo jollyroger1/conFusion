@@ -114,7 +114,9 @@ export class DishdetailComponent implements OnInit {
   
   onSubmit() {
     this.comment = this.dishdetailForm.value;
-	this.comment.date = (new Date()).toString();
+	/* this.comment.date = (new Date()).toString(); */
+	/* this.comment.date = dateToday.toISOString(); */
+	this.comment.date = new Date().toISOString();
 	/* this.array_copy.comments.push(this.comment); */ /* Refactor for Restangular*/
 	this.dishcopy.comments.push(this.comment);
 	this.dishcopy.save()
