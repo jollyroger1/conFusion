@@ -14,5 +14,4 @@ export class HighlightDirective {
 	@HostListener('mouseleave') onmouseleave() {
 		this.renderer.removeClass(this.el.nativeElement, 'highlight'); /* remove a Class to the grid item in grid list */
 	}
-	}
 }

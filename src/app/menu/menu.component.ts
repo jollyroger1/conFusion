@@ -3,12 +3,20 @@ import { Component, OnInit, Inject } from '@angular/core'; /* Use Inject interfa
 import { Dish } from '../shared/dish'; /* Class of data types for a dish */
 /* import { DISHES } from '../shared/dishes'; */  /* Array of json 4 dishes */ /* Use Service instead */
 import {DishService } from '../services/dish.service'; /* Service that returns array of json dishes */
-
+import { flyInOut, expand }  from '../animations/app.animation';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
+  host: {
+	'[@flyInOut]': 'true',
+	'style': 'display: block;'
+  },
+  animations: [
+	flyInOut(),
+	expand()
+  ]
 })
 export class MenuComponent implements OnInit {
 
