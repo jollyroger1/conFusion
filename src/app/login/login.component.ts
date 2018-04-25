@@ -9,7 +9,8 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 
 export class LoginComponent implements OnInit {
 
-  user = {remember: false};
+  /* user = {remember: false};  /* Refactor for Webpack Build Process*/ 
+  user = {username: '', password: '', remember: false};
 
   constructor(public dialogRef: MdDialogRef<LoginComponent>) { }
 

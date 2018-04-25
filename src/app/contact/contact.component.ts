@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
-import { flyInOut } from '../animations/app.animation';
+import { flyInOut, visibility, hide, expand } from '../animations/app.animation';
+import { FeedbackService} from "../services/feedback.service";
 
 @Component({
   selector: 'app-contact',
@@ -12,7 +13,10 @@ import { flyInOut } from '../animations/app.animation';
 	'style': 'display: block;'
   },
   animations: [
-	flyInOut()
+	flyInOut(),
+	visibility(),
+	hide(),
+	expand()
   ]
 })
 export class ContactComponent implements OnInit {
@@ -20,6 +24,8 @@ export class ContactComponent implements OnInit {
   feedbackForm: FormGroup; /* Form Model that will host the Reactive Form */
   feedback: Feedback;
   contactType = ContactType;
+  visibilityForm = 'shown';
+  visibilitySpinner = 'hidden';
   
   formErrors = {
 	'firstname': '',
@@ -49,7 +55,8 @@ export class ContactComponent implements OnInit {
 	},
   };
 
-  constructor(private fb: FormBuilder) { 
+  constructor(	private fb: FormBuilder,
+				private feedBackService: FeedbackService) { 
 	this.createForm();
   }
 
@@ -91,8 +98,24 @@ export class ContactComponent implements OnInit {
   }
   
   onSubmit() {
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    /* this.feedback = this.feedbackForm.value; */
+	/* console.log(this.feedback); */
+	
+	/* Hide the Form and Show the Spinner until data returned from server */	  
+	this.visibilityForm = 'hidden';
+    this.visibilitySpinner = 'shown';
+    this.feedBackService.submitFeedback(this.feedbackForm.value)
+      .subscribe(feedback => {
+		/* Data returned from server - now hide the Spinner */  
+        this.visibilitySpinner = 'hidden';
+        this.feedback = feedback;
+        setTimeout(timeOutFunction=>{
+		  /* Show the Form for 5 seconds*/
+		  this.feedback = null;
+          this.visibilityForm = 'shown';
+          }, 5000);
+      });
+	
     this.feedbackForm.reset({
 		firstname: '',
 		lastname: '',

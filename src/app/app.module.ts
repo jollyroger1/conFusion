@@ -33,6 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HighlightDirective } from './directives/highlight.directive';
+import { FeedbackService} from  "./services/feedback.service";
+
 
 
 @NgModule({
@@ -61,10 +63,11 @@ import { HighlightDirective } from './directives/highlight.directive';
 	RestangularModule.forRoot(RestangularConfigFactory) /* This is further described in Restangular Documentation */
   ],
   providers: [ 	DishService, 
-				PromotionService, 
+				PromotionService,
+				FeedbackService,
 				LeaderService,
-				{ provide: 'BaseURL', useValue: baseURL },
-				ProcessHTTPMsgService], /* provide baseURL as Value Provider */
+				{ provide: 'BaseURL', useValue: baseURL }, /* provide baseURL as Value Provider */
+				ProcessHTTPMsgService], 
   entryComponents: [
      LoginComponent /* Triggered by click in another component and neither part of Router Module nor explicitly included into the Template of another Component (header.component.ts file) */
   ],
