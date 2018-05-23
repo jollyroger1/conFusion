@@ -109,8 +109,8 @@ export class ContactComponent implements OnInit {
 		/* Data returned from server - now hide the Spinner */  
         this.visibilitySpinner = 'hidden';
         this.feedback = feedback;
+	  /* Show the Form for 5 seconds*/
         setTimeout(timeOutFunction=>{
-		  /* Show the Form for 5 seconds*/
 		  this.feedback = null;
           this.visibilityForm = 'shown';
           }, 5000);
